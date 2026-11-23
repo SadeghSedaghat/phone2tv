@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#09090B" />
+    <meta name="description" content="Instantly send text, links, code, images and files from Phone to Smart TV." />
+    <title>Phone2TV - Instant Cross-Device Sharing</title>
+
+    <!-- TV Polyfill & Error Trapper -->
+    <script>
+      // Polyfill globalThis for older Smart TV browsers (Tizen / webOS)
+      if (typeof globalThis === 'undefined') {
+        window.globalThis = window;
+      }
+
+      // Visual Error Overlay for Smart TV debugging
+      window.onerror = function(msg, url, line, col, error) {
+        var el = document.getElementById('tv-error-badge');
+        if (!el) {
+          el = document.createElement('div');
+          el.id = 'tv-error-badge';
+          el.style.cssText = 'position:fixed;top:10px;left:10px;right:10px;z-index:999999;background:#b91c1c;color:#fff;padding:16px;font-size:16px;font-family:monospace;border-radius:12px;border:2px solid #f87171;box-shadow:0 10px 25px rgba(0,0,0,0.8);word-break:break-all;';
+          document.body.appendChild(el);
+        }
+        el.innerHTML = '<strong style="font-size:18px;">⚠️ Smart TV Browser Error:</strong><br/>' + 
+          msg + '<br/><span style="font-size:12px;color:#fca5a5;">At: ' + (url || 'script') + ' : ' + line + ':' + col + '</span>';
+      };
+    </script>
+  </head>
+  <body class="bg-[#09090B] text-[#FAFAFA] min-h-screen antialiased select-none selection:bg-primary selection:text-white">
+    <div id="root">
+      <!-- Visible loading state for Smart TV while bundle initializes -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:#09090B;color:#FAFAFA;font-family:system-ui,-apple-system,sans-serif;text-align:center;padding:20px;">
+        <div style="width:50px;height:50px;border:4px solid #27272A;border-top-color:#6366F1;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px;"></div>
+        <h1 style="font-size:32px;font-weight:800;letter-spacing:-0.03em;margin:0 0 8px 0;">Phone<span style="color:#6366F1;">2</span>TV</h1>
+        <p style="font-size:16px;color:#A1A1AA;margin:0;">Initializing Smart TV interface...</p>
+        <style>
+          @keyframes spin { to { transform: rotate(360deg); } }
+        </style>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

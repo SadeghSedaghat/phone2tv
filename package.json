@@ -1,0 +1,28 @@
+{
+  "name": "phone2tv",
+  "version": "1.0.0",
+  "description": "Instant cross-device sharing from Phone to Smart TV",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "node client/fix-lucide.cjs && node client/build.cjs",
+    "test": "node test/app.test.js"
+  },
+  "keywords": [
+    "cross-device",
+    "phone2tv",
+    "smart-tv",
+    "clipboard",
+    "websocket",
+    "realtime"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0"
+  }
+}
